@@ -44,11 +44,11 @@ function epiCycle(x, y, rotation, fourier) {
         x += radius * cos(freq * time + phase + rotation);
         y += radius * sin(freq * time + phase + rotation);
 
-        stroke(255, 100);
+        stroke(0, 100);
         noFill();
         ellipse(prevx, prevy, radius*2);
 
-        stroke(255);
+        stroke(0);
         line(prevx, prevy, x, y);
     }
 
@@ -56,7 +56,7 @@ function epiCycle(x, y, rotation, fourier) {
 }
 
 function draw() {
-    background(0);
+    background(255);
 
     let vx = epiCycle(width/2, 100, 0, fourierX);
     let vy = epiCycle(100, height/2+50, HALF_PI, fourierY);
@@ -72,6 +72,10 @@ function draw() {
         point(path[i].x, path[i].y);
     }
     endShape();
+
+    if (time == TWO_PI) {
+        path.pop();
+    }
 
     const dt = TWO_PI / fourierY.length;
     time += dt;
